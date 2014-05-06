@@ -29,6 +29,7 @@
 
 (depends-on "anything")
 (depends-on "coffee-mode")
+(depends-on "json-mode")
 (depends-on "color-theme")
 (depends-on "git-gutter")
 (depends-on "gitignore-mode")
