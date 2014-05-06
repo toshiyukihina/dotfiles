@@ -32,10 +32,10 @@
 (setq-default indent-tabs-mode nil)
 
 ;; linum setting
-(setq load-path (cons "~/.emacs.d" load-path))
-(require 'linum)
-(global-linum-mode)
-(setq linum-format "%4d ")
+;(setq load-path (cons "~/.emacs.d" load-path))
+;(require 'linum)
+;(global-linum-mode)
+;(setq linum-format "%4d ")
 
 ;; Javascript setting
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -48,6 +48,22 @@
              (setq js2-basic-offset 2)
              (setq js2-enter-indents-newline t)
              ))
+
+;; Ruby mode
+(autoload 'ruby-mode "ruby-mode"
+  "Mode for editing ruby source files" t)
+(add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Capfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+
+(require 'ruby-block)
+(ruby-block-mode t)
+(setq ruby-block-highlight-toggle t)
+
+(require 'ruby-electric)
+(add-hook 'ruby-mode-hook '(lambda () (ruby-electric-mode t)))
+(setq ruby-electric-expand-delimiters-list nil)
 
 ;; coffee
 (defun coffee-custom ()
@@ -69,6 +85,22 @@
 ;; (setq zencoding-indentation 2)
 
 ;;(put 'set-goal-column 'disabled nil)
+
+;; git-gutter
+(require 'git-gutter)
+
+(global-git-gutter-mode t)
+(add-hook 'ruby-mode-hook 'git-gutter-mode)
+
+(setq git-gutter:modified-sign "    ") ;; two space
+(setq git-gutter:added-sign "+")    ;; multiple character is OK
+(setq git-gutter:deleted-sign "-")
+
+(set-face-background 'git-gutter:modified "purple") ;; background color
+(set-face-foreground 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:deleted "red")
+
+(setq git-gutter:window-width 2)
 
 ;; theme
 (require 'color-theme)
