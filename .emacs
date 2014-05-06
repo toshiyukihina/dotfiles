@@ -1,6 +1,10 @@
 ;; emacs setting
 (transient-mark-mode 1)
 
+;(setq-default tab-width 2)
+(setq default-tab-width 2)
+(setq-default indent-tabs-mode nil)
+
 ;; key bind
 (global-set-key "\C-h" 'delete-backward-char)
 (define-key global-map (kbd "C-]") 'anything)
@@ -10,7 +14,6 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 (package-initialize)
-
 
 ;; anything
 (require 'anything)
@@ -27,19 +30,21 @@
 ;; (set-buffer-file-coding-system 'utf-8)
 ;; (setq default-buffer-file-coding-system 'utf-8)
 
-(setq-default tab-width 2)
-(setq default-tab-width 2)
-(setq-default indent-tabs-mode nil)
-
 ;; linum setting
 ;(setq load-path (cons "~/.emacs.d" load-path))
 ;(require 'linum)
 ;(global-linum-mode)
 ;(setq linum-format "%4d ")
 
+;; json-mode
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
+(add-hook 'json-mode-hook 'electric-pair-mode)
+(add-hook 'json-mode-hook '(lambda ()
+                             (setq js-indent-level 2)
+                             ))
+
 ;; Javascript setting
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
 (add-hook 'js2-mode-hook
           '(lambda ()
              (setq indent-tabs-mode nil)
